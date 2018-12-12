@@ -1,8 +1,5 @@
 package com.thiago.cursomc.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,15 +14,18 @@ import com.thiago.cursomc.services.CategoriaService;
 @RequestMapping(value = "/categorias")
 public class CategoriaResource {
 
-	//Instancia automaticamente o objeto
+	// Instancia automaticamente o objeto
 	@Autowired
 	private CategoriaService service;
-	
-	//O endpoint será "/categorias + /{id}"
-	//O id fica entre chaves pois representa um parâmetro
+
+	// O endpoint será "/categorias + /{id}"
+	// O id fica entre chaves pois representa um parâmetro
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	//ResponseEntity retorna um Http
-	//@PathVariable para dizer ao spring que o parâmetro receberá o "{id}
+
+	// ResponseEntity retorna um Http
+	// @PathVariable para dizer ao spring que o parâmetro receberá o "{id}
+
 	public ResponseEntity<?> find(@PathVariable Integer id) {
 
 		Categoria obj = service.buscar(id);
