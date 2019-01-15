@@ -12,6 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 public class Produto implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -22,13 +25,16 @@ public class Produto implements Serializable {
 	private String nome;
 	private Double preco;
 
-	// Como um produto pode ter várias categorias, cria-se uma List<Categoria>
+	// Como um produto pode ter várias categorias, cria-se uma List<Produto>
 	// ManyToMany = Relacionamento muitos para muitos
 	// JoinTable = Cria a tabela intermediária entre o relacionamento
 	// name = Nome dessa tabela
 	// joinColumns = Nome do campo da FK baseada na PK dessa classe(Produto)
 	// inverseJoinColumns = Nome do campo da FK baseada na PK da outra
 	// classe(Categoria)
+	
+	@JsonBackReference // Ja foram buscados os objetos do outro
+	// lado da assossiacao. Agora nao busca mais objetos
 	@ManyToMany
 	@JoinTable(name = "PRODUTO_CATEGORIA", joinColumns = @JoinColumn(name = "produto_id"), inverseJoinColumns = @JoinColumn(name = "categoria_id"))
 	private List<Categoria> categorias = new ArrayList<>();
